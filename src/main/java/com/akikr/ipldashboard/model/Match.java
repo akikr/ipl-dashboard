@@ -1,4 +1,4 @@
-package io.dell.ipldashboard.model;
+package com.akikr.ipldashboard.model;
 
 import java.time.LocalDate;
 

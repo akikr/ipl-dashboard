@@ -1,4 +1,4 @@
-package io.dell.ipldashboard.data;
+package com.akikr.ipldashboard.data;
 
 public class MatchInput {
 

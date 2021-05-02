@@ -1,4 +1,4 @@
-package io.dell.ipldashboard.data;
+package com.akikr.ipldashboard.data;
 
 import java.time.LocalDate;
 
@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemProcessor;
 
-import io.dell.ipldashboard.model.Match;
+import com.akikr.ipldashboard.model.Match;
 
 public class MatchDataProcesser implements ItemProcessor<MatchInput, Match> {
 
