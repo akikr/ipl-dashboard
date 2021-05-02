@@ -61,8 +61,8 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
               });
 
       teamData.values().forEach(team -> entityManager.persist(team));
-      teamData.values().forEach(team -> System.out.println("TeamData: " + team));
 
+//      teamData.values().forEach(team -> System.out.println("TeamData: " + team));
 //      jdbcTemplate.query("SELECT team1, team2, date FROM match",
 //      (rs, row) -> "Team 1: " + rs.getString(1) + " Team 2: " + rs.getString(2) + " Date: " + rs.getString(3))
 //      .forEach(match -> System.out.println(match));
