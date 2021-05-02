@@ -12,6 +12,7 @@ public class MatchDataProcesser implements ItemProcessor<MatchInput, Match> {
 
   private static final Logger LOG = LoggerFactory.getLogger(MatchDataProcesser.class);
   private static final String DECISION_TO_BAT = "bat";
+  private static final String DECISION_TO_FIELD = "field";
 
   @Override
   public Match process(final MatchInput matchInput) throws Exception {
@@ -25,16 +26,8 @@ public class MatchDataProcesser implements ItemProcessor<MatchInput, Match> {
     match.setVenue(matchInput.getVenue());
 
     //Set Team 1 and Team 2 depending upon Toss-Decision
-    String firstInningsTeam, secondInningsTeam;
-    if(DECISION_TO_BAT.equalsIgnoreCase(matchInput.getTossDecision())) {
-      firstInningsTeam = matchInput.getTossWinner();
-      secondInningsTeam = matchInput.getTossWinner().equalsIgnoreCase(matchInput.getTeam1()) ? matchInput.getTeam2() : matchInput.getTeam1();
-    } else {
-      secondInningsTeam = matchInput.getTossWinner();
-      firstInningsTeam = matchInput.getTossWinner().equalsIgnoreCase(matchInput.getTeam1()) ? matchInput.getTeam2() : matchInput.getTeam1();
-    }
-    match.setTeam1(firstInningsTeam);
-    match.setTeam2(secondInningsTeam);
+    match.setTeam1(getFirstInningsTeam(matchInput));
+    match.setTeam2(getSecondInningsTeam(matchInput));
 
     match.setTossWinner(matchInput.getTossWinner());
     match.setTossDecision(matchInput.getTossDecision());
@@ -45,5 +38,17 @@ public class MatchDataProcesser implements ItemProcessor<MatchInput, Match> {
     match.setUmpire2(matchInput.getUmpire2());
 
     return match;
+  }
+
+  public String getFirstInningsTeam(MatchInput matchInput) {
+    return (DECISION_TO_BAT.equalsIgnoreCase(matchInput.getTossDecision())) 
+            ? matchInput.getTossWinner() 
+            : matchInput.getTossWinner().equalsIgnoreCase(matchInput.getTeam1()) ? matchInput.getTeam2() : matchInput.getTeam1();
+  }
+
+  public String getSecondInningsTeam(MatchInput matchInput) {
+    return (DECISION_TO_FIELD.equalsIgnoreCase(matchInput.getTossDecision()))
+            ? matchInput.getTossWinner()
+            : matchInput.getTossWinner().equalsIgnoreCase(matchInput.getTeam1()) ? matchInput.getTeam2() : matchInput.getTeam1();
   }
 }
