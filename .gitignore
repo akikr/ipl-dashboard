@@ -34,3 +34,6 @@ build/
 
 ### Apple-Mac-OS ###
 .DS_Store
+
+### Recat-App: front-end ###
+/src/front-end/node_modules/
