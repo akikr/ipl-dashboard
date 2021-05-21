@@ -20,6 +20,7 @@ import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
@@ -34,6 +35,9 @@ public class BatchConfig {
   @Autowired
   public StepBuilderFactory stepBuilderFactory;
 
+  @Value("${match.data.source:match-data.csv}")
+  private String matchDataSource;
+
   private final String[] FIELD_NAMES = new String[] { "id", "city", "date", "player_of_match", "venue", "neutral_venue",
       "team1", "team2", "toss_winner", "toss_decision", "winner", "result", "result_margin", "eliminator", "method",
       "umpire1", "umpire2" };
@@ -41,7 +45,7 @@ public class BatchConfig {
   @Bean
   public FlatFileItemReader<MatchInput> reader() {
     return new FlatFileItemReaderBuilder<MatchInput>().name("MatchItemReader")
-        .resource(new ClassPathResource("match-data.csv")).delimited().names(FIELD_NAMES)
+        .resource(new ClassPathResource(matchDataSource)).delimited().names(FIELD_NAMES)
         .fieldSetMapper(new BeanWrapperFieldSetMapper<>() {
           {
             setTargetType(MatchInput.class);
