@@ -24,6 +24,11 @@ public class TeamController {
         this.teamService = teamService;
     }
 
+    @GetMapping("/teams")
+    public Iterable<Team> getAllTeams() {
+        return this.teamService.getAllTeams();
+    }
+
     @GetMapping("/team/{teamName}")
     public Team getTeam(@PathVariable String teamName) {
         return this.teamService.getTeamData(teamName);

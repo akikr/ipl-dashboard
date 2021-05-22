@@ -11,10 +11,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class TeamService {
-
+    
     private TeamRepository teamRepository;
     private MatchRepository matchRepository;
-
+    
+    public Iterable<Team> getAllTeams() {
+      return this.teamRepository.findAll();
+    }
+    
     public TeamService(TeamRepository teamRepository, MatchRepository matchRepository) {
         this.teamRepository = teamRepository;
         this.matchRepository = matchRepository;
@@ -31,4 +35,5 @@ public class TeamService {
         LocalDate endDateOfYear = LocalDate.of(year, 12, 31);
         return this.matchRepository.getMatchesByTeamBetweenDates(teamName, startDateOfYear, endDateOfYear);
     }
+
 }
