@@ -1,6 +1,8 @@
 package com.akikr.ipldashboard.service;
 
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import com.akikr.ipldashboard.model.Match;
@@ -15,13 +17,14 @@ public class TeamService {
     private TeamRepository teamRepository;
     private MatchRepository matchRepository;
     
-    public Iterable<Team> getAllTeams() {
-      return this.teamRepository.findAll();
-    }
-    
+
     public TeamService(TeamRepository teamRepository, MatchRepository matchRepository) {
         this.teamRepository = teamRepository;
         this.matchRepository = matchRepository;
+    }
+
+    public List<Team> getAllTeams() {
+      return (List<Team>) this.teamRepository.findAll();
     }
 
     public Team getTeamData(String teamName) {

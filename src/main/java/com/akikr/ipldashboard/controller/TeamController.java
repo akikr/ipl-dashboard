@@ -25,7 +25,7 @@ public class TeamController {
     }
 
     @GetMapping("/teams")
-    public Iterable<Team> getAllTeams() {
+    public List<Team> getAllTeams() {
         return this.teamService.getAllTeams();
     }
 

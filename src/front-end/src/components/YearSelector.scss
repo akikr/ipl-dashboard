@@ -4,5 +4,9 @@
   li {
     margin-top: 10px;
     margin-bottom: 20px;
+
+    :hover {
+      color: red;
+    }
   }
 }
