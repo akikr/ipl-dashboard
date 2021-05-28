@@ -13,7 +13,7 @@ export const MatchPage = () => {
   useEffect(
     () => {
       const fetchMatches = async () => {
-        const response = await fetch(`http://localhost:8081/api/team/${teamName}/matches?year=${year}`);
+        const response = await fetch(`${process.env.REACT_APP_API_ROOT_URL}/team/${teamName}/matches?year=${year}`);
         const data = await response.json();
         setMatches(data);
       };
@@ -39,7 +39,7 @@ export const MatchPage = () => {
         <div>
           <h1 className="page-heading">{teamName}{' matches in '}{year}</h1>
           { matches.length <= 0 
-          ? <h1 className="team-info">{teamName}{" didn't played this year !!"}</h1>
+          ? <h1 className="team-info">{teamName}{" didn't play this year !!"}</h1>
           : matches.map(match => <MatchDetailCard key={match.id} teamName={teamName} match={match} />)
           }
         </div>

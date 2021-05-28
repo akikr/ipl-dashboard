@@ -13,7 +13,7 @@ export const TeamPage = () => {
   useEffect(
     () => {
       const fetchMatches = async () => {
-        const response = await fetch(`http://localhost:8081/api/team/${teamName}`);
+        const response = await fetch(`${process.env.REACT_APP_API_ROOT_URL}/team/${teamName}`);
         const data = await response.json();
         setTeam(data);
       };
@@ -22,13 +22,7 @@ export const TeamPage = () => {
   );
 
   if (!team || !team.teamName) {
-    return (
-      <div>
-        <br/>
-        <br/>
-        <h1>{'Team Not Found !!'}</h1>
-      </div>
-    );
+    return [];
   } else {
     return (
       <div className="TeamPage">

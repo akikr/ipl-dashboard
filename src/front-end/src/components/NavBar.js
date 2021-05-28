@@ -6,7 +6,7 @@ export const NavBar = () => {
 
   return (
     <div className="NavBar">
-      <Link to={`/`}>{'Team Dashboard'}</Link>
+      <Link to={``}>{'Team Dashboard'}</Link>
     </div>
   );
 }
