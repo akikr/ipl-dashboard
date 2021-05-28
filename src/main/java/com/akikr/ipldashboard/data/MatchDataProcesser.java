@@ -16,7 +16,7 @@ public class MatchDataProcesser implements ItemProcessor<MatchInput, Match> {
 
   @Override
   public Match process(final MatchInput matchInput) throws Exception {
-    LOG.info("Processing Match-Data from MatchInput");
+
     Match match = new Match();
 
     match.setId(Long.parseLong(matchInput.getId()));

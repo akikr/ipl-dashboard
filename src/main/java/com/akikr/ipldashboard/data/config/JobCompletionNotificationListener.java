@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.io.Console;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -61,7 +62,7 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
               });
 
       teamData.values().forEach(team -> entityManager.persist(team));
-
+      teamData.values().forEach(team -> System.out.println(team));
     }
   }
 }
