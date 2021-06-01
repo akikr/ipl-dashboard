@@ -46,7 +46,7 @@ public class BatchConfig {
   public FlatFileItemReader<MatchInput> reader() {
     return new FlatFileItemReaderBuilder<MatchInput>().name("MatchItemReader")
         .resource(new ClassPathResource(matchDataSource)).delimited().names(FIELD_NAMES)
-        .fieldSetMapper(new BeanWrapperFieldSetMapper<>() {
+        .fieldSetMapper(new BeanWrapperFieldSetMapper<MatchInput>() {
           {
             setTargetType(MatchInput.class);
           }
