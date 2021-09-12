@@ -10,4 +10,4 @@ Data Set Used https://www.kaggle.com/patrickb1912/ipl-complete-dataset-20082020/
 
 Contributing Look at the Issues tab for feature improvements and bugs filed for this repo. Make sure you watch the YouTube playlist to see how this application is built first!
 
-#Ipl-Dashboard Application : https://ipl-team-dashboard.herokuapp.com
+Ipl-Dashboard Application : https://ipl-team-dashboard.herokuapp.com
