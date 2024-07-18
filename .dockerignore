@@ -1,0 +1,19 @@
+README.md
+
+### Git ###
+.git
+.gitignore
+
+### IntelliJ IDEA ###
+.idea/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
+
+Dockerfile
+
+**/*.log
+
