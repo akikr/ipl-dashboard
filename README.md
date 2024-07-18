@@ -1,13 +1,8 @@
 Java Brains: IPL Dashboard Browse your favorite IPL teams and access their past games details, wins and losses ratios - accessible by team and tournament year.
+Project-link: [https://github.com/koushikkothagal/ipl-dashboard](https://github.com/koushikkothagal/ipl-dashboard)
 
-This is a companion project for the Java Brains course on Full Stack Development using Spring Boot and React JS.
+This is a companion project for the Java Brains course on Full Stack Development using Spring Boot and React JS, using technologies like Spring Boot, Spring Batch and React
 
-Check out the playlist below to see this app built end-to-end from scratch.
+DataSet Used: [https://www.kaggle.com/patrickb1912/ipl-complete-dataset-20082020/metadata](https://www.kaggle.com/patrickb1912/ipl-complete-dataset-20082020/metadata)
 
-Technologies Spring Boot Spring Batch Java Persistence API, Repositories and JPQL HSQL DB React JS AWS BeanStalk
-
-Data Set Used https://www.kaggle.com/patrickb1912/ipl-complete-dataset-20082020/metadata
-
-Contributing Look at the Issues tab for feature improvements and bugs filed for this repo. Make sure you watch the YouTube playlist to see how this application is built first!
-
-Ipl-Dashboard Application : https://ipl-team-dashboard.herokuapp.com
+Ipl-Dashboard Application: [https://ipl-team-dashboard.herokuapp.com](https://ipl-team-dashboard.herokuapp.com)
