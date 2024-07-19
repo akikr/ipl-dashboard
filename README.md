@@ -6,4 +6,4 @@ This is a companion project for the Java Brains course on Full Stack Development
 
 DataSet Used: [https://www.kaggle.com/patrickb1912/ipl-complete-dataset-20082020/metadata](https://www.kaggle.com/patrickb1912/ipl-complete-dataset-20082020/metadata)
 
-Ipl-Dashboard Application: [ipl-dashboard.com](http://144.24.158.67)
+IPL-Dashboard Application: [ipl-dashboard.com](http://144.24.158.67)
