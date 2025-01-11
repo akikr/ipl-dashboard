@@ -1,8 +1,11 @@
 HELP.md
 target/
+node_modules/
+**/node_modules/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+.DS_Store
 
 ### STS ###
 .apt_generated
@@ -26,14 +29,9 @@ target/
 /nbdist/
 /.nb-gradle/
 build/
+**/build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
 ### VS Code ###
 .vscode/
-
-### Apple-Mac-OS ###
-.DS_Store
-
-### Recat-App: front-end ###
-/src/front-end/node_modules/
