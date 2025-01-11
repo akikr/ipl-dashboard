@@ -110,11 +110,12 @@
                     <configuration>
                         <!-- Configuration for Build Image -->
                         <image>
-                            <name>${project.artifactId}:${project.version}</name>
+                            <name>ghcr.io/akikr/${project.artifactId}:${project.version}</name>
                             <builder>paketobuildpacks/builder:tiny</builder>
                             <env>
                                 <BP_JVM_VERSION>${java.version}</BP_JVM_VERSION>
                                 <BP_OCI_ARCHITECTURES>linux/amd64,linux/arm64</BP_OCI_ARCHITECTURES>
+                                <BP_IMAGE_LABELS>org.opencontainers.image.source="${project.url}" maintainer="ankit akikr@duck.com"</BP_IMAGE_LABELS>
                             </env>
                         </image>
                         <cleanCache>true</cleanCache>
