@@ -7,7 +7,7 @@ node_modules/
 !**/src/test/**/target/
 .DS_Store
 .env
-.conf
+*.env
 
 ### STS ###
 .apt_generated
