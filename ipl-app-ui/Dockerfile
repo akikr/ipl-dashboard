@@ -1,5 +1,8 @@
 # Set the base-image for build stage
 FROM node:18.20-alpine AS build
+# Set the maintainer label
+LABEL org.opencontainers.image.source https://github.com/akikr/ipl-dashboard
+LABEL maintainer="ankit akikr@duck.com"
 # Set up working directory
 WORKDIR /usr/app
 # Copy only package.json and package-lock.json
@@ -13,6 +16,9 @@ RUN npm run build
 
 # Set the base-image for final stage
 FROM nginx:1.27-alpine
+# Set the maintainer label
+LABEL org.opencontainers.image.source https://github.com/akikr/ipl-dashboard
+LABEL maintainer="ankit akikr@duck.com"
 # Copy the artifact from build-stage
 COPY --from=build /usr/app/build /usr/share/nginx/html
 # Copy the nginx config file
