@@ -1,0 +1,29 @@
+services:
+  ipl-app:
+    build:
+      context: ./ipl-app
+      dockerfile: Dockerfile
+    image: ipl-app:v1
+    environment:
+      - APP_ARGS=--spring.profiles.active=default
+      - SERVER_HOST=localhost
+    ports:
+      - "8081"
+    deploy:
+      mode: replicated
+      replicas: 1
+
+  ipl-app-ui:
+    build:
+      context: ./ipl-app-ui
+      dockerfile: Dockerfile
+    image: ipl-app-ui:v1
+    ports:
+      - "80:80"
+    volumes:
+      - ./ipl_app.conf:/etc/nginx/conf.d/services/ipl_app.conf:ro
+      - ./config.js:/usr/share/nginx/html/config.js:ro
+    depends_on:
+      ipl-app:
+        condition: service_started
+
