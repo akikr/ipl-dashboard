@@ -6,7 +6,7 @@
 
 ### DataSet Used: [kaggle.com/ipl-complete-dataset](https://www.kaggle.com/patrickb1912/ipl-complete-dataset-20082020/metadata)
 
-### IPL-Dashboard Application: [ipl-dashboard.com](http://129.154.43.221)
+### IPL-Dashboard Application deployed: [ipl-dashboard.com](http://129.154.43.221)
 
 - Run the application in docker:
 
