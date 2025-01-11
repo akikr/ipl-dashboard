@@ -6,6 +6,7 @@ node_modules/
 !**/src/main/**/target/
 !**/src/test/**/target/
 .DS_Store
+.env
 
 ### STS ###
 .apt_generated

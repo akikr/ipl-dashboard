@@ -28,4 +28,3 @@ Dockerfile
 ### Env files ###
 .env
 *.env
-*.conf
