@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "app.server.host_address",
+      "type": "java.lang.String",
+      "description": "The production server host_address for OpenAPI swagger API documentation."
+    }
+  ]
+}

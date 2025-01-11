@@ -1,28 +1,47 @@
 package com.akikr.ipldashboard;
 
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.servers.Server;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.util.Arrays;
+import java.util.List;
+
+@Slf4j
 @SpringBootApplication
-@EnableSwagger2
-public class IplDashboardApplication {
-
-	public static void main(String[] args) {
+public class IplDashboardApplication
+{
+	public static void main(String[] args)
+	{
+		log.info("IplDashboardApplication started executing 'main' method with arguments:{}", Arrays.asList(args));
 		SpringApplication.run(IplDashboardApplication.class, args);
+		log.info("Completed executing 'main' method");
+
+		Runtime.getRuntime().addShutdownHook(new Thread(() -> log.info("Shutting down IplDashboardApplication !!")));
 	}
 
-	//Swagger-Configuration for all APIs documentation
 	@Bean
-	public Docket swaggerConfiguration() {
-		return new Docket(DocumentationType.SWAGGER_2)
-				.select()
-				.apis(RequestHandlerSelectors.basePackage("com.akikr.ipldashboard"))
-				.build();
+	public OpenAPI openApi(@Value("${app.server.host_address:localhost/app}") String serverHostAddress)
+	{
+		//@formatter:off
+		return new OpenAPI().info(new Info()
+				.title("IPL-DashboardApplication API Documentation")
+				.version("1.0.0")
+				.description("API documentation for my IPL-DashboardApplication"))
+				.servers(getServers(serverHostAddress));
+		//@formatter:on
 	}
 
+	private List<Server> getServers(String serverHostAddress)
+	{
+		return List.of(
+				new Server().url("http://localhost:8081/app").description("Dev"),
+				new Server().url("http://" + serverHostAddress).description("Prod-HTTP"),
+				new Server().url("https://" + serverHostAddress).description("Prod-HTTPS"));
+	}
 }
