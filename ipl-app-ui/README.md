@@ -1,10 +1,23 @@
-## IPL Dashboard frontend in React
+# IPL Dashboard frontend in React
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
+Setup the `node` enviroment using `.nvmrc` [nvm-cli](https://github.com/nvm-sh/nvm?tab=readme-ov-file#nvmrc)
+
+```sh
+nvm install
+nvm use
+```
+
+---
+
 In the project directory, you can run:
+
+### `npm install`
+
+Install the npm dependencies
 
 ### `npm start`
 
