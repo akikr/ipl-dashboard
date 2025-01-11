@@ -1,0 +1,30 @@
+README.md
+.DS_Store
+.project
+.settings
+.classpath
+make.sh
+Makefile
+HELP.md
+target/
+node_modules/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+### Git files ###
+.git
+.gitignore
+### IntelliJ IDEA ###
+.idea/
+*.iml
+### VS Code ###
+.vscode/
+### Docker files ###
+Dockerfile
+*.yml
+*.yaml
+### log files ###
+**/*.log
+### Env files ###
+.env
+*.env

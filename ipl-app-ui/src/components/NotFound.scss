@@ -1,0 +1,28 @@
+.not-found {
+  text-align: center;
+  padding: 2rem;
+
+  h1 {
+    color: #e74c3c;
+    margin-bottom: 1rem;
+  }
+
+  a {
+    color: #3498db;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .highlight-team {
+    background: #801212;
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-weight: bold;
+    color: #fff;
+    display: inline-block;
+    margin: 0 4px;
+  }
+}
