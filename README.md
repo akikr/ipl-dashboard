@@ -10,12 +10,14 @@
 
 #### IPL-Dashboard Application OpenAPI Swagger docs: [ipl-dashboard-swagger-ui](http://129.154.43.221/app/swagger-ui/index.html)
 
+---
+
 - Run the application in docker:
 
 ```sh
 docker-compose -f compose.yaml up -d
 ```
 
-See application: [http://localhost](http://localhost)
+- See application: [http://localhost](http://localhost)
 
-See `ipl-app` OpenAPI Swagger docs: [ipl-app-swagger-ui](http://localhost/app/swagger-ui/index.html)
+- See `ipl-app` OpenAPI Swagger docs: [ipl-app-swagger-ui](http://localhost/app/swagger-ui/index.html)
