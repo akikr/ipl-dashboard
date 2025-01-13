@@ -8,6 +8,8 @@ node_modules/
 .DS_Store
 .env
 *.env
+.secrets
+*.secrets
 
 ### STS ###
 .apt_generated

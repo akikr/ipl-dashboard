@@ -1,7 +1,7 @@
 # Set the base-image for build stage
 FROM maven:3-eclipse-temurin-17 AS build
 # Set the maintainer label
-LABEL org.opencontainers.image.source https://github.com/akikr/ipl-dashboard
+LABEL org.opencontainers.image.source="https://github.com/akikr/ipl-dashboard"
 LABEL maintainer="ankit akikr@duck.com"
 # Set up working directory
 RUN mkdir -p /usr/app
@@ -25,7 +25,7 @@ RUN jlink --add-modules $(cat modules.info) \
 # Set the base-image for final stage
 FROM ubuntu:22.04
 # Set the maintainer label
-LABEL org.opencontainers.image.source https://github.com/akikr/ipl-dashboard
+LABEL org.opencontainers.image.source="https://github.com/akikr/ipl-dashboard"
 LABEL maintainer="ankit akikr@duck.com"
 # Set JAVA_HOME using application specific JRE from build-stage
 ENV JAVA_HOME=/usr/lib/java/jre
