@@ -1,0 +1,26 @@
+services:
+  ipl-app:
+    image: ghcr.io/akikr/ipl-app:${IMAGE_TAG}
+    environment:
+      - APP_ARGS=--spring.profiles.active=prod
+      - SERVER_HOST=${SERVER_HOST}
+    ports:
+      - "8081"
+    deploy:
+      mode: replicated
+      replicas: 1
+
+  ipl-app-ui:
+    image: ghcr.io/akikr/ipl-app-ui:${IMAGE_TAG}
+    ports:
+      - "80:80"
+    environment:
+      - SERVER_HOST=${SERVER_HOST}
+    volumes:
+      - ./ipl_app.conf:/etc/nginx/conf.d/services/ipl_app.conf:ro
+      - ./config.prod.js:/tmp/config.prod.js:ro
+      - ./config-template.sh:/docker-entrypoint.d/config-template.sh:ro
+    entrypoint: ["/bin/sh", "/docker-entrypoint.d/config-template.sh"]
+    depends_on:
+      ipl-app:
+        condition: service_started
