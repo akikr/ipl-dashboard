@@ -15,8 +15,8 @@
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring.framework.version>5.3.13</spring.framework.version>
-        <spring.boot.dependencies.version>2.6.0</spring.boot.dependencies.version>
+        <spring.framework.version>6.2.1</spring.framework.version>
+        <spring.boot.dependencies.version>3.4.1</spring.boot.dependencies.version>
         <spring.boot.maven.plugin.version>3.4.0</spring.boot.maven.plugin.version>
         <maven.dependency.plugin.version>3.8.0</maven.dependency.plugin.version>
     </properties>
@@ -55,6 +55,11 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
             <scope>runtime</scope>
@@ -62,8 +67,8 @@
 
         <dependency>
             <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-ui</artifactId>
-            <version>1.7.0</version>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.1.0</version>
         </dependency>
 
         <dependency>

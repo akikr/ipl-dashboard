@@ -41,7 +41,7 @@ public class IplDashboardApplication
 	{
 		return List.of(
 				new Server().url("http://localhost:8081/app").description("Dev"),
-				new Server().url("http://" + serverHostAddress).description("Prod-HTTP"),
-				new Server().url("https://" + serverHostAddress).description("Prod-HTTPS"));
+				new Server().url("http://" + serverHostAddress).description("Prod - HTTP"),
+				new Server().url("https://" + serverHostAddress).description("Prod - HTTPS"));
 	}
 }
