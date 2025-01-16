@@ -1,17 +1,14 @@
 package com.akikr.ipldashboard.config;
 
 import com.akikr.ipldashboard.model.MatchInput;
-import com.akikr.ipldashboard.processor.MatchDataProcessor;
 import com.akikr.ipldashboard.repo.Match;
+import jakarta.persistence.EntityManager;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
-import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
-import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
-import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
-import org.springframework.batch.item.database.JdbcBatchItemWriter;
-import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder;
+import org.springframework.batch.core.repository.JobRepository;
+import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
@@ -19,20 +16,16 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
-
-import javax.sql.DataSource;
+import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
-@EnableBatchProcessing
 class BatchJobConfig
 {
-	private final JobBuilderFactory jobBuilderFactory;
-	private final StepBuilderFactory stepBuilderFactory;
+	private final EntityManager entityManager;
 
-	public BatchJobConfig(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory)
+	public BatchJobConfig(EntityManager entityManager)
 	{
-		this.jobBuilderFactory = jobBuilderFactory;
-		this.stepBuilderFactory = stepBuilderFactory;
+		this.entityManager = entityManager;
 	}
 
 	@Value("${match.data.source:match-data.csv}")
@@ -59,38 +52,28 @@ class BatchJobConfig
 	}
 
 	@Bean
-	public JdbcBatchItemWriter<Match> writer(DataSource dataSource)
+	public MatchDataProcessor processor()
 	{
-		//@formatter:off
-		String insertQuery = "INSERT INTO match (id, city, date, player_of_match, venue, team1, team2, toss_winner, toss_decision, match_winner, result, result_margin, umpire1, umpire2)"
-				+ " VALUES (:id, :city, :date, :playerOfMatch, :venue, :team1, :team2, :tossWinner, :tossDecision, :matchWinner, :result, :resultMargin, :umpire1, :umpire2)";
-		return new JdbcBatchItemWriterBuilder<Match>()
-				.itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
-				.sql(insertQuery)
-				.dataSource(dataSource)
-				.build();
-		//@formatter:on
+		return new MatchDataProcessor();
 	}
 
 	@Bean
-	public Job importUserJob(JobCompletionListener listener, Step step1)
+	public MatchItemWriter writer()
 	{
-		//@formatter:off
-		return jobBuilderFactory.get("importUserJob")
-				.incrementer(new RunIdIncrementer())
-				.listener(listener)
-				.flow(step1)
-				.end()
-				.build();
-		//@formatter:on
+		return new MatchItemWriter(entityManager);
 	}
 
 	@Bean
-	public Step step1(JdbcBatchItemWriter<Match> writer, FlatFileItemReader<MatchInput> reader, MatchDataProcessor processor)
+	public Step step(
+			JobRepository jobRepository,
+			PlatformTransactionManager transactionManager,
+			FlatFileItemReader<MatchInput> reader,
+			MatchDataProcessor processor,
+			MatchItemWriter writer)
 	{
 		//@formatter:off
-		return stepBuilderFactory.get("step1")
-				.<MatchInput, Match> chunk(10)
+		return new StepBuilder("step", jobRepository)
+				.<MatchInput, Match> chunk(10, transactionManager)
 				.reader(reader)
 				.processor(processor)
 				.writer(writer)
@@ -99,8 +82,15 @@ class BatchJobConfig
 	}
 
 	@Bean
-	public MatchDataProcessor processor()
+	public Job importDataJob(JobRepository jobRepository, JobCompletionListener listener, Step step)
 	{
-		return new MatchDataProcessor();
+		//@formatter:off
+		return new JobBuilder("importDataJob", jobRepository)
+				.incrementer(new RunIdIncrementer())
+				.listener(listener)
+				.flow(step)
+				.end()
+				.build();
+		//@formatter:on
 	}
 }

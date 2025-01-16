@@ -1,4 +1,4 @@
-package com.akikr.ipldashboard.processor;
+package com.akikr.ipldashboard.config;
 
 import com.akikr.ipldashboard.model.MatchInput;
 import com.akikr.ipldashboard.repo.Match;

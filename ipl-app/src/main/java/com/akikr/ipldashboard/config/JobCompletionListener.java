@@ -1,20 +1,20 @@
 package com.akikr.ipldashboard.config;
 
 import com.akikr.ipldashboard.repo.Team;
+import jakarta.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.JobExecution;
-import org.springframework.batch.core.listener.JobExecutionListenerSupport;
+import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
 @Component
-class JobCompletionListener extends JobExecutionListenerSupport
+class JobCompletionListener implements JobExecutionListener
 {
 	private final EntityManager entityManager;
 
