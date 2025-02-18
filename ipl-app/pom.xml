@@ -116,7 +116,6 @@
                         <!-- Configuration for Build Image -->
                         <image>
                             <name>ghcr.io/akikr/${project.artifactId}:${project.version}</name>
-                            <builder>paketobuildpacks/builder:tiny</builder>
                             <env>
                                 <BP_JVM_VERSION>${java.version}</BP_JVM_VERSION>
                                 <BP_OCI_ARCHITECTURES>linux/amd64,linux/arm64</BP_OCI_ARCHITECTURES>
