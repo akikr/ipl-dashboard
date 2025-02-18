@@ -15,7 +15,7 @@
 - Run the application in docker:
 
 ```sh
-docker-compose -f compose.yaml up -d
+docker compose -f compose.yaml up -d
 ```
 
 - See application: [http://localhost](http://localhost)
