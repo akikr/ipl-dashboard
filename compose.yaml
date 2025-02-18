@@ -21,9 +21,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./ipl_app.conf:/etc/nginx/conf.d/services/ipl_app.conf:ro
       - ./config.js:/usr/share/nginx/html/config.js:ro
     depends_on:
       ipl-app:
         condition: service_started
-

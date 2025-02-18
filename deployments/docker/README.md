@@ -1,6 +1,6 @@
 # Deployment via Docker compose
 
-Deployment setps:-
+Deployment steps:-
 
 - Setup ENV variables:
 

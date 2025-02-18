@@ -9,6 +9,13 @@ services:
     deploy:
       mode: replicated
       replicas: 1
+      resources:
+        limits:
+          cpus: 1.0
+          memory: 512M
+        reservations:
+          cpus: 0.5
+          memory: 256M
 
   ipl-app-ui:
     image: ghcr.io/akikr/ipl-app-ui:${IMAGE_TAG}
@@ -17,7 +24,6 @@ services:
     environment:
       - SERVER_HOST=${SERVER_HOST}
     volumes:
-      - ./ipl_app.conf:/etc/nginx/conf.d/services/ipl_app.conf:ro
       - ./config.prod.js:/tmp/config.prod.js:ro
       - ./config-template.sh:/docker-entrypoint.d/config-template.sh:ro
     entrypoint: ["/bin/sh", "/docker-entrypoint.d/config-template.sh"]
