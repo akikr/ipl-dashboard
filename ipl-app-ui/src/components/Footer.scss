@@ -1,0 +1,37 @@
+.footer {
+  background-color: #333;
+  color: white;
+  padding: 1rem 1rem;
+  position: inherit;
+  margin-top: 1rem;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+
+  .footer-content {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-copyright {
+    p {
+      margin: 0;
+    }
+  }
+
+  .footer-links {
+    a {
+      color: white;
+      text-decoration: none;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
