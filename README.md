@@ -8,7 +8,7 @@
 
 ### IPL-Dashboard Application deployed: [ipl-dashboard.com](http://129.154.43.221)
 
-#### IPL-Dashboard Application OpenAPI Swagger docs: [ipl-dashboard-swagger-ui](http://129.154.43.221/app/swagger-ui/index.html)
+#### IPL-Dashboard Application OpenAPI Swagger docs: [ipl-dashboard-swagger-ui](http://129.154.43.221/app/swagger-ui/index.html) OR [ipl-dashboard-swagger-ui](https://ipl-dashboard-8fiu.onrender.com/app/swagger-ui/index.html)
 
 ---
 
