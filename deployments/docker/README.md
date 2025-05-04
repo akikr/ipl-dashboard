@@ -5,7 +5,9 @@ Deployment steps:-
 - Setup ENV variables:
 
 ```sh
-SERVER_HOST=<server-host-ip/localhost>
+IMAGE_REPO=<image-registry/<username>
+# e.g., docker.io/<username> OR ghcr.io/<username>
+SERVER_HOST=<server-vm-ip>
 IMAGE_TAG=<app-version/latest>
 ```
 
