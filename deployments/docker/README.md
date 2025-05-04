@@ -7,7 +7,7 @@ Deployment steps:-
 ```sh
 IMAGE_REPO=<image-registry/<username>
 # e.g., docker.io/<username> OR ghcr.io/<username>
-SERVER_HOST=<server-vm-ip>
+SERVER_HOST=<server/vm-ip>
 IMAGE_TAG=<app-version/latest>
 ```
 
