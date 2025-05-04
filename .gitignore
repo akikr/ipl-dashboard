@@ -10,6 +10,7 @@ node_modules/
 *.env
 .secrets
 *.secrets
+*.ssh/
 
 ### STS ###
 .apt_generated

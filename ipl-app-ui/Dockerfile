@@ -22,8 +22,8 @@ LABEL maintainer="ankit akikr@duck.com"
 # Copy the artifact from build-stage
 COPY --from=build /usr/app/build /usr/share/nginx/html
 # Copy the nginx config file
-COPY default.conf /etc/nginx/conf.d/default.conf
-COPY ipl_app.conf /etc/nginx/conf.d/services/ipl_app.conf
+COPY --from=build /usr/app/default.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /usr/app/ipl_app.conf /etc/nginx/conf.d/services/ipl_app.conf
 # Set a non-root user
 RUN chmod -R go+rwx /var/run && \
     chmod -R go+rwx /var/cache/nginx && \

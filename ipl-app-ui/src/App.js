@@ -3,6 +3,7 @@ import { TeamPage } from "./pages/TeamPage";
 import { MatchPage } from "./pages/MatchPage";
 import { HomePage } from "./pages/HomePage";
 import { NavBar } from "./components/NavBar";
+import { Footer } from "./components/Footer";
 import "./App.scss";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
         </Routes>
       </Router>
+      <Footer/>
     </div>
   );
 }
