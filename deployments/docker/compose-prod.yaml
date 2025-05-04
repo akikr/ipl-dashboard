@@ -1,6 +1,6 @@
 services:
   ipl-app:
-    image: ghcr.io/akikr/ipl-app:${IMAGE_TAG}
+    image: ${IMAGE_REPO}/ipl-app:${IMAGE_TAG}
     environment:
       - APP_ARGS=--spring.profiles.active=prod
       - SERVER_HOST=${SERVER_HOST}
@@ -18,7 +18,7 @@ services:
           memory: 256M
 
   ipl-app-ui:
-    image: ghcr.io/akikr/ipl-app-ui:${IMAGE_TAG}
+    image: ${IMAGE_REPO}/ipl-app-ui:${IMAGE_TAG}
     ports:
       - "80:80"
     environment:

@@ -3,7 +3,7 @@ services:
     build:
       context: ./ipl-app
       dockerfile: Dockerfile
-    image: ghcr.io/akikr/ipl-app:v1
+    image: ipl-app:latest
     environment:
       - APP_ARGS=--spring.profiles.active=default
       - SERVER_HOST=localhost
@@ -17,7 +17,7 @@ services:
     build:
       context: ./ipl-app-ui
       dockerfile: Dockerfile
-    image: ghcr.io/akikr/ipl-app-ui:v1
+    image: ipl-app-ui:latest
     ports:
       - "80:80"
     volumes:
