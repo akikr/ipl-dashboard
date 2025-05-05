@@ -6,6 +6,7 @@ services:
       - SERVER_HOST=${SERVER_HOST}
     ports:
       - "8081"
+    restart: always
     deploy:
       mode: replicated
       replicas: 1
@@ -17,10 +18,29 @@ services:
           cpus: 0.5
           memory: 256M
 
+  healthcheck-sidecar:
+    image: curlimages/curl:latest
+    container_name: healthcheck
+    command: >
+      sh -c '
+        while true; do
+          if curl -sf http://ipl-app:8081/app/teams -w "\n"; then
+            echo "ipl-app service is healthy"
+            exit 0;
+          else
+            echo "Waiting for ipl-app service to be healthy..."
+            sleep 10;
+          fi
+        done'
+    depends_on:
+      ipl-app:
+        condition: service_started
+
   ipl-app-ui:
     image: ${IMAGE_REPO}/ipl-app-ui:${IMAGE_TAG}
     ports:
       - "80:80"
+    restart: always
     environment:
       - SERVER_HOST=${SERVER_HOST}
     volumes:
@@ -28,5 +48,5 @@ services:
       - ./config-template.sh:/docker-entrypoint.d/config-template.sh:ro
     entrypoint: ["/bin/sh", "/docker-entrypoint.d/config-template.sh"]
     depends_on:
-      ipl-app:
-        condition: service_started
+      healthcheck-sidecar:
+        condition: service_completed_successfully

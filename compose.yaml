@@ -9,9 +9,28 @@ services:
       - SERVER_HOST=localhost
     ports:
       - "8081"
+    restart: always
     deploy:
       mode: replicated
       replicas: 1
+
+  healthcheck-sidecar:
+    image: curlimages/curl:latest
+    container_name: healthcheck
+    command: >
+      sh -c '
+        while true; do
+          if curl -sf http://ipl-app:8081/app/teams -w "\n"; then
+            echo "ipl-app service is healthy"
+            exit 0;
+          else
+            echo "Waiting for ipl-app service to be healthy..."
+            sleep 10;
+          fi
+        done'
+    depends_on:
+      ipl-app:
+        condition: service_started
 
   ipl-app-ui:
     build:
@@ -22,6 +41,7 @@ services:
       - "80:80"
     volumes:
       - ./config.js:/usr/share/nginx/html/config.js:ro
+    restart: always
     depends_on:
-      ipl-app:
-        condition: service_started
+      healthcheck-sidecar:
+        condition: service_completed_successfully
