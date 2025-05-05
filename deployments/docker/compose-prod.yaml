@@ -26,6 +26,7 @@ services:
         while true; do
           if curl -sf http://ipl-app:8081/app/teams -w "\n"; then
             echo "ipl-app service is healthy"
+            sleep 10;
             exit 0;
           else
             echo "Waiting for ipl-app service to be healthy..."
