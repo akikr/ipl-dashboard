@@ -6,6 +6,13 @@ services:
       - SERVER_HOST=${SERVER_HOST}
     ports:
       - "8081"
+    labels:
+      - "traefik.enable=true"
+      # Route all the requests to 'ipl-app' via web-entrypoint on http port 80
+      - "traefik.http.routers.ipl-app.entrypoints=web"
+      # Route all the request with path-regex /app/* to this ipl-app
+      - "traefik.http.routers.ipl-app.rule=PathPrefix(`/app`)"
+      - "traefik.http.services.ipl-app.loadbalancer.server.port=8081"
     restart: always
     deploy:
       mode: replicated
@@ -18,7 +25,7 @@ services:
           cpus: 0.5
           memory: 256M
 
-  healthcheck-sidecar:
+  ipl-app-sidecar:
     image: curlimages/curl:latest
     container_name: healthcheck
     command: >
@@ -39,7 +46,14 @@ services:
   ipl-app-ui:
     image: ${IMAGE_REPO}/ipl-app-ui:${IMAGE_TAG}
     ports:
-      - "80:80"
+      - "8000"
+    labels:
+      - "traefik.enable=true"
+      # Route all the requests to 'ipl-app-ui' via web-entrypoint on http port 80
+      - "traefik.http.routers.ipl-app-ui.entrypoints=web"
+      # Route all the request with path-regex /* to this ipl-app-ui
+      - "traefik.http.routers.ipl-app-ui.rule=PathPrefix(`/`)"
+      - "traefik.http.services.ipl-app-ui.loadbalancer.server.port=8000"
     restart: always
     environment:
       - SERVER_HOST=${SERVER_HOST}
@@ -48,5 +62,25 @@ services:
       - ./config-template.sh:/docker-entrypoint.d/config-template.sh:ro
     entrypoint: ["/bin/sh", "/docker-entrypoint.d/config-template.sh"]
     depends_on:
-      healthcheck-sidecar:
+      ipl-app-sidecar:
         condition: service_completed_successfully
+
+  api-proxy:
+      image: traefik:v3.3.1
+      container_name: traefik
+      command:
+        # Enables access logging
+        - "--log.level=INFO"
+        - "--accesslog=true"
+        # Do not expose any docker containers unless explicitly told so
+        - "--providers.docker.exposedbydefault=false"
+        # Enables the web-entrypoint on http port 80
+        - "--entrypoints.web.address=:80"
+      ports:
+        - "80:80"
+      volumes:
+        # So that Traefik can listen to the Docker events
+        - /var/run/docker.sock:/var/run/docker.sock
+      depends_on:
+        ipl-app-ui:
+          condition: service_started
