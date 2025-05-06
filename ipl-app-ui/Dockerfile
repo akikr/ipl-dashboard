@@ -38,6 +38,6 @@ RUN chown -R nginx:nginx /var/run && \
     chown -R nginx:nginx /etc/nginx/conf.d
 USER nginx
 # Expose the application port
-EXPOSE 80
+EXPOSE 8000
 # Run using start-up cmd
 CMD ["nginx", "-g", "daemon off;"]
